@@ -10,7 +10,7 @@ function preload() {
 // This version introduces a 2D array of cells (0 = off, 1 = on), draws each cell as a rectangle, and lets you click to toggle a cell’s state. We keep the hover outline for clarity and add a “C = clear” shortcut.
 
 // === tunables ===
-let cellSize = 30; // try other values like 12, 25, 40...
+let cellSize = 10; // try other values like 12, 25, 40...
 
 // === derived ===
 let colCount, rowCount;
@@ -120,8 +120,8 @@ function initCells(fillValue = 0) {
 
 function mouseCell() {
   // constrain to avoid width/height edge rounding issues
-  const mx = constrain(mouseX, 0, width - 1);
-  const my = constrain(mouseY, 0, height - 1);
+  const mx = constrain(mouseX, 0, width );
+  const my = constrain(mouseY, 0, height );
   return {
     col: floor(mx / cellSize),
     row: floor(my / cellSize),
