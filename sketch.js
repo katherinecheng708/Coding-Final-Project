@@ -154,3 +154,15 @@ function drawLabel(s) {
   text(s, 10 + pad, 10 + pad);
 }
 
+const audio = new Audio('sound-effect.wav');
+audio.loop = true;
+
+window.addEventListener('mousedown', () => {
+  audio.currentTime = 0;
+  audio.play().catch(err => console.error(err));
+});
+
+window.addEventListener('mouseup', () => {
+  audio.pause();
+  audio.currentTime = 0;
+});
