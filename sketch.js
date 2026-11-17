@@ -44,10 +44,15 @@ function draw() {
       const alive = cells[c][r] === 1;
 
       // choose a fill per state
-      fill(alive ? 0 : 255);
-      rect(x, y, cellSize, cellSize);
+      //fill(alive ? 0 : 255);
+      //rect(x, y, cellSize, cellSize);
+      if (cells[c][r] === 0) {
+          fill(255);
+          rect(x, y, cellSize, cellSize);
+      }
     }
   }
+
 
   // light grid lines on top (optional)
   stroke(200);
@@ -82,13 +87,9 @@ function draw() {
 // === interactions ===
 function mousePressed() {
   const { col, row } = mouseCell();
-  if (inBounds(col, row)) {
-    cells[col][row] = cells[col][row] ? 0 : 1; // toggle
-    if (cells[col][row] === 1) {
-      fill(255, 255, 0, 0);
-      noStroke();
 
-    }
+  if (inBounds(col, row)) {
+    cells[col][row] = 1; // Reveal cell
   }
 }
 
