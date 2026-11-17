@@ -10,7 +10,7 @@ function preload() {
 // This version introduces a 2D array of cells (0 = off, 1 = on), draws each cell as a rectangle, and lets you click to toggle a cell’s state. We keep the hover outline for clarity and add a “C = clear” shortcut.
 
 // === tunables ===
-let cellSize = 10; // try other values like 12, 25, 40...
+let cellSize = 25; // try other values like 12, 25, 40...
 
 // === derived ===
 let colCount, rowCount;
@@ -132,7 +132,11 @@ function inBounds(col, row) {
   return col >= 0 && col < colCount && row >= 0 && row < rowCount;
 }
 
+
+
 function windowResized() {
+  cellSize = max(10, min(40, floor(min(windowWidth, windowHeight) / 50))); // adjust cellSize based on window size
+
   resizeCanvas(windowWidth, windowHeight);
   recalcGrid();
   initCells(0); // simple approach: reset on resize (we’ll refine later if needed)
