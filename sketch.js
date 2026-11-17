@@ -10,7 +10,7 @@ function preload() {
 // This version introduces a 2D array of cells (0 = off, 1 = on), draws each cell as a rectangle, and lets you click to toggle a cell’s state. We keep the hover outline for clarity and add a “C = clear” shortcut.
 
 // === tunables ===
-let cellSize = 25; // try other values like 12, 25, 40...
+let cellSize = 30; // try other values like 12, 25, 40...
 
 // === derived ===
 let colCount, rowCount;
@@ -32,8 +32,13 @@ function setup() {
 
 function draw() {
   //background(200);
-  image(img, windowWidth / 2, windowHeight / 2);
+  background(0);
   //background(255);
+
+  let scale = 2;
+  let newW = img.width * scale;
+  let newH = img.height * scale;
+  image(img, width / 2, height / 2, newW, newH);
 
   // draw cells (view from model)
   noStroke();
