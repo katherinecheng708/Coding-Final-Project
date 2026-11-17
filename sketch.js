@@ -1,10 +1,3 @@
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-}
-
-function draw() {
-  background(220);
-}
 
 let img;
 
@@ -12,15 +5,6 @@ function preload() {
   img = loadImage("image/images.jpg");
 }
 
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  imageMode(CENTER);
-}
-
-function draw() {
-  background(200);
-  image(img, windowWidth / 2, windowHeight / 2);
-}
 
 // Step 2 — Rectangular cells & click selection
 // This version introduces a 2D array of cells (0 = off, 1 = on), draws each cell as a rectangle, and lets you click to toggle a cell’s state. We keep the hover outline for clarity and add a “C = clear” shortcut.
@@ -42,10 +26,14 @@ function setup() {
   recalcGrid();
   initCells(0); // start with all off
   describe('A clickable grid of rectangles. Click toggles a cell on/off.');
+
+  imageMode(CENTER);
 }
 
 function draw() {
-  background(255);
+  //background(200);
+  image(img, windowWidth / 2, windowHeight / 2);
+  //background(255);
 
   // draw cells (view from model)
   noStroke();
@@ -56,7 +44,7 @@ function draw() {
       const alive = cells[c][r] === 1;
 
       // choose a fill per state
-      fill(alive ? 0 : 0);
+      fill(alive ? 0 : 255);
       rect(x, y, cellSize, cellSize);
     }
   }
@@ -96,6 +84,11 @@ function mousePressed() {
   const { col, row } = mouseCell();
   if (inBounds(col, row)) {
     cells[col][row] = cells[col][row] ? 0 : 1; // toggle
+    if (cells[col][row] === 1) {
+      fill(255, 255, 0, 0);
+      noStroke();
+
+    }
   }
 }
 
