@@ -18,6 +18,8 @@ let colCount, rowCount;
 // === model: 2D array cells[col][row] with values 0 (off) or 1 (on) ===
 let cells = [];
 
+let currentColor = [255, 255, 255];
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont('monospace');
@@ -51,12 +53,13 @@ function draw() {
       // choose a fill per state
       //fill(alive ? 0 : 255);
       //rect(x, y, cellSize, cellSize);
-      if (cells[c][r] === 0) {
-          fill(255);
-          rect(x, y, cellSize, cellSize);
+      if (!cells[c][r].revealed) {
+        fill(cells[c][r].color);
+        rect(x, y, cellSize, cellSize);
       }
     }
-  }
+    }
+
 
 
   // light grid lines on top (optional)
@@ -94,12 +97,28 @@ function mousePressed() {
   const { col, row } = mouseCell();
 
   if (inBounds(col, row)) {
-    cells[col][row] = 1; // Reveal cell
+    cells[col][row].revealed = !cells[col][row].revealed;
+
+    if (!cells[col][row].revealed){
+      cells[col][row].color = [...currentColor];
+    }
+
   }
+
 }
 
 function keyPressed() {
   if (key === 'C' || key === 'c') initCells(0); // clear board
+
+  if (key === '1') currentColor = [255, 0, 0]; // Red
+  if (key === '2') currentColor = [255, 165, 0]; // Orange
+  if (key === '3') currentColor = [255, 255, 0]; // Yellow
+  if (key === '4') currentColor = [0, 128, 0]; // Green 
+  if (key === '5') currentColor = [0, 0, 255]; // Blue
+  if (key === '6') currentColor = [128, 0, 128]; // Purple 
+  if (key === '7') currentColor = [0, 0, 0]; // black
+  if (key === '8') currentColor = [255, 255, 255]; //white
+
 }
 
 // === helpers ===
@@ -110,10 +129,15 @@ function recalcGrid() {
 
 function initCells(fillValue = 0) {
   cells = [];
+
   for (let c = 0; c < colCount; c++) {
     cells[c] = [];
+
     for (let r = 0; r < rowCount; r++) {
-      cells[c][r] = fillValue;
+      cells[c][r] = {
+        revealed: true,
+        color: [255, 255, 255]
+      };
     }
   }
 }
