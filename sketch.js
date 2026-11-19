@@ -1,8 +1,10 @@
 
-let img;
+
+let img1;
 
 function preload() {
-  img = loadImage("image/images.jpg");
+  
+  img1 = loadImage("image/Coloringsheet.png");
 }
 
 
@@ -10,7 +12,7 @@ function preload() {
 // This version introduces a 2D array of cells (0 = off, 1 = on), draws each cell as a rectangle, and lets you click to toggle a cell’s state. We keep the hover outline for clarity and add a “C = clear” shortcut.
 
 // === tunables ===
-let cellSize = 25; // try other values like 12, 25, 40...
+let cellSize = 30; // try other values like 12, 25, 40...
 
 // === derived ===
 let colCount, rowCount;
@@ -34,13 +36,13 @@ function setup() {
 
 function draw() {
   //background(200);
-  background(0);
+  background(255);
   //background(255);
 
   let scale = 2;
-  let newW = img.width * scale;
-  let newH = img.height * scale;
-  image(img, width / 2, height / 2, newW, newH);
+  let newW = img1.width * scale;
+  let newH = img1.height * scale;
+  image(img1, width / 2, height / 2); //newW, newH
 
   // draw cells (view from model)
   noStroke();
@@ -48,7 +50,7 @@ function draw() {
     for (let r = 0; r < rowCount; r++) {
       const x = c * cellSize;
       const y = r * cellSize;
-      const alive = cells[c][r] === 1;
+      //const alive = cells[c][r] === 1;
 
       // choose a fill per state
       //fill(alive ? 0 : 255);
@@ -92,8 +94,9 @@ function draw() {
   );
 }
 
-// === interactions ===
-function mousePressed() {
+// === interactions ==
+
+function mouseClicked(){
   const { col, row } = mouseCell();
 
   if (inBounds(col, row)) {
@@ -102,9 +105,7 @@ function mousePressed() {
     if (!cells[col][row].revealed){
       cells[col][row].color = [...currentColor];
     }
-
   }
-
 }
 
 function keyPressed() {
@@ -120,6 +121,8 @@ function keyPressed() {
   if (key === '8') currentColor = [255, 255, 255]; //white
 
 }
+
+
 
 // === helpers ===
 function recalcGrid() {
@@ -141,6 +144,7 @@ function initCells(fillValue = 0) {
     }
   }
 }
+
 
 function mouseCell() {
   // constrain to avoid width/height edge rounding issues
