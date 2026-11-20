@@ -1,26 +1,13 @@
-
-
+//Variables
 let img1;
+let cellSize = 30; 
+let colCount, rowCount;
+let cells = [];
+let currentColor = [255, 255, 255];
 
 function preload() {
-  
   img1 = loadImage("image/Coloringsheet.png");
 }
-
-
-// Step 2 — Rectangular cells & click selection
-// This version introduces a 2D array of cells (0 = off, 1 = on), draws each cell as a rectangle, and lets you click to toggle a cell’s state. We keep the hover outline for clarity and add a “C = clear” shortcut.
-
-// === tunables ===
-let cellSize = 30; // try other values like 12, 25, 40...
-
-// === derived ===
-let colCount, rowCount;
-
-// === model: 2D array cells[col][row] with values 0 (off) or 1 (on) ===
-let cells = [];
-
-let currentColor = [255, 255, 255];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -30,7 +17,6 @@ function setup() {
   recalcGrid();
   initCells(0); // start with all off
   describe('A clickable grid of rectangles. Click toggles a cell on/off.');
-
   imageMode(CENTER);
 }
 
@@ -40,9 +26,9 @@ function draw() {
   //background(255);
 
   let scale = 2;
-  let newW = img1.width * scale;
-  let newH = img1.height * scale;
-  image(img1, width / 2, height / 2); //newW, newH
+  //let newW = img1.width * scale;
+  //let newH = img1.height * scale;
+  image(img1, width / 2, height / 2); 
 
   // draw cells (view from model)
   noStroke();
@@ -60,9 +46,7 @@ function draw() {
         rect(x, y, cellSize, cellSize);
       }
     }
-    }
-
-
+  }
 
   // light grid lines on top (optional)
   stroke(200);
@@ -94,8 +78,6 @@ function draw() {
   );
 }
 
-// === interactions ==
-
 function mouseClicked(){
   const { col, row } = mouseCell();
 
@@ -119,10 +101,7 @@ function keyPressed() {
   if (key === '6') currentColor = [128, 0, 128]; // Purple 
   if (key === '7') currentColor = [0, 0, 0]; // black
   if (key === '8') currentColor = [255, 255, 255]; //white
-
 }
-
-
 
 // === helpers ===
 function recalcGrid() {
@@ -145,7 +124,6 @@ function initCells(fillValue = 0) {
   }
 }
 
-
 function mouseCell() {
   // constrain to avoid width/height edge rounding issues
   const mx = constrain(mouseX, 0, width );
@@ -159,8 +137,6 @@ function mouseCell() {
 function inBounds(col, row) {
   return col >= 0 && col < colCount && row >= 0 && row < rowCount;
 }
-
-
 
 function windowResized() {
   cellSize = max(10, min(40, floor(min(windowWidth, windowHeight) / 50))); // adjust cellSize based on window size
