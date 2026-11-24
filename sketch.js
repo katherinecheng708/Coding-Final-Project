@@ -103,6 +103,12 @@ function keyPressed() {
   if (key === '8') currentColor = [255, 255, 255]; //white
 }
 
+
+fill(0)
+textsize(200)
+textAlign(CENTER,CENTER)
+text("Press 1 for Red, 2 for Orange, 3 for Yellow, 4 for Green, 5 for Blue, 6 for Purple, 7 for Black, 8 for White", 10, 100);
+
 // === helpers ===
 function recalcGrid() {
   colCount = floor(width / cellSize);
