@@ -164,7 +164,7 @@ function drawLabel(s) {
   text(s, 10 + pad, 10 + pad);
 }
 
-const audio = new Audio('sound-effect.wav');
+const audio = new Audio('audio/Click-sound.wav');
 audio.loop = true;
 
 window.addEventListener('mousedown', () => {
