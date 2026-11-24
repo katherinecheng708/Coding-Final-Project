@@ -46,6 +46,7 @@ function draw() {
         rect(x, y, cellSize, cellSize);
       }
     }
+    drawInstructions();
   }
 
   // light grid lines on top (optional)
@@ -101,13 +102,7 @@ function keyPressed() {
   if (key === '6') currentColor = [128, 0, 128]; // Purple 
   if (key === '7') currentColor = [0, 0, 0]; // black
   if (key === '8') currentColor = [255, 255, 255]; //white
-}
-
-
-fill(0)
-textsize(200)
-textAlign(CENTER,CENTER)
-text("Press 1 for Red, 2 for Orange, 3 for Yellow, 4 for Green, 5 for Blue, 6 for Purple, 7 for Black, 8 for White", 10, 100);
+draw}
 
 // === helpers ===
 function recalcGrid() {
@@ -164,7 +159,7 @@ function drawLabel(s) {
   text(s, 10 + pad, 10 + pad);
 }
 
-const audio = new Audio('audio/Click-sound.wav');
+const audio = new Audio('sound-effect.wav');
 audio.loop = true;
 
 window.addEventListener('mousedown', () => {
@@ -176,3 +171,28 @@ window.addEventListener('mouseup', () => {
   audio.pause();
   audio.currentTime = 0;
 });
+
+function drawInstructions() {
+ push();
+
+ fill(255,230);
+ noStroke();
+ rect(10,60,220,240);
+
+ fill(0);
+ textSize(14);
+  textAlign(LEFT, TOP);
+
+  text("CONTROLS", 20, 70);
+  text("1: Red", 20, 95);
+  text("2: Orange", 20, 115);
+  text("3: Yellow", 20, 135);
+  text("4: Green", 20, 155);
+  text("5: Blue", 20, 175);
+  text("6: Purple", 20, 195);
+  text("7: Black", 20, 215);
+  text("8: White", 20, 235);
+  text("C: Clear Board", 20, 255);
+
+  pop();
+}
